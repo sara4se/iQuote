@@ -22,30 +22,34 @@ struct CameraScanText: View {
                       
                         Button {
                             self.presentationMode.wrappedValue.dismiss()
+                         
                         } label: {
                             Text("Cancel").accessibilityLabel("Cancel")
+                            
                         }
                     }
                 }
                 .interactiveDismissDisabled(true)
-        }.onChange(of: scanResult) { newValue in
+        }
+        .onChange(of: scanResult) { newValue in
             if (!scanResult.isEmpty) {
                 saveText()
-                pupdateAllQuotes()
+           
 //                populateQuotes()
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
     }
     func pupdateAllQuotes() {
-        listAllQuote = coreDM.updateQuotes()
+        coreDM.quotes = coreDM.updateQuotes()
     }
     func populateQuotes() {
-        listAllQuote = coreDM.getAllQuotes()
+        coreDM.quotes = coreDM.getAllQuotes()
    }
     func saveText(){
-        listQuote.append(scanResult)
+//        listQuote.append(scanResult)
         coreDM.saveQuotes(quotesText: scanResult)
+   
     }
 }
 
